@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="소스 파일">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="헤더 파일">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="CalibrationTool">
+      <UniqueIdentifier>{41cc0946-8b3f-4cdf-b507-72eeba740a99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CalibrationTool\Source">
+      <UniqueIdentifier>{1d23a7f2-49e7-49a6-a28e-03734d08fcea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CalibrationTool\Header">
+      <UniqueIdentifier>{90a8b4ef-4a3d-43c8-9dbc-3f5f77da8b4e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CommonTools">
+      <UniqueIdentifier>{17a05fdb-ad6b-4c08-a953-7587db8eac1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CommonTools\Header">
+      <UniqueIdentifier>{99083ff9-b428-43d6-9425-f65242ff923d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CommonTools\Source">
+      <UniqueIdentifier>{c9ee3b2d-f70c-48ac-8c35-d5984a11e3c4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="framework.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CCalibrationTool.h">
+      <Filter>CalibrationTool\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageProcessingTools.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Basic.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CImageConversionTool.h">
+      <Filter>CommonTools\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CFov.h">
+      <Filter>CalibrationTool\Header</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="dllmain.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CCalibrationTool.cpp">
+      <Filter>CalibrationTool\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CImageConversionTool.cpp">
+      <Filter>CommonTools\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CFov.cpp">
+      <Filter>CalibrationTool\Source</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
