@@ -1,6 +1,9 @@
 #pragma once
 #include "Basic.h"
-#include "CFov.h"
+
+//Blobs ฐüทร 
+#include "CBlobData.h"
+#include "CBlobDetection.h"
 
 namespace CalibrationTool
 {
@@ -10,6 +13,8 @@ namespace CalibrationTool
 		cv::Mat m_IntrinsicMatrix;
 		cv::Mat m_ExtrinsicMatrix;
 
+		Blob::CBlobDetection* m_pBlobDetection = nullptr;
+
 	public:
 		CCalibrationTool();
 		~CCalibrationTool();
@@ -17,16 +22,9 @@ namespace CalibrationTool
 		cv::Mat GetIntrinsicMatrix() { return m_IntrinsicMatrix.clone(); }
 		cv::Mat GetExtrinsicMatrix() { return m_ExtrinsicMatrix.clone(); }
 
-		bool Calibration(cv::Mat &Image);
+		bool Calibration(cv::Mat &Image, std::vector<cv::Point3d> World);
 
-		bool Calibration(std::vector<CalibrationTool::CFov>& Fovs);
-
-	private:
-		bool PreProecssing(cv::Mat& Image, cv::Mat& PreImage);
-
-		void BlobDetection(cv::Mat& Image);
-
-		cv::Mat MargeFovImage(std::vector<CalibrationTool::CFov>& Fovs);
+		bool MappingPoint();
 	};
 }
 

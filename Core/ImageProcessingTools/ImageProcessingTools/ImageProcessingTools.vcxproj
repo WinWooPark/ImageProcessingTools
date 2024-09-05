@@ -146,16 +146,21 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Basic.h" />
+    <ClInclude Include="CBlobData.h" />
+    <ClInclude Include="CBlobDetection.h" />
+    <ClInclude Include="CCalibrationData.h" />
     <ClInclude Include="CCalibrationTool.h" />
-    <ClInclude Include="CFov.h" />
     <ClInclude Include="CImageConversionTool.h" />
+    <ClInclude Include="CommonDefine.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="ImageProcessingTools.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CBlobData.cpp" />
+    <ClCompile Include="CBlobDetection.cpp" />
+    <ClCompile Include="CCalibrationData.cpp" />
     <ClCompile Include="CCalibrationTool.cpp" />
-    <ClCompile Include="CFov.cpp" />
     <ClCompile Include="CImageConversionTool.cpp" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="pch.cpp">

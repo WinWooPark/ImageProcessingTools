@@ -4,12 +4,16 @@
 using namespace std;
 using namespace cv;
 using namespace CalibrationTool;
+using namespace Blob;
 
 CalibrationTool::CCalibrationTool::CCalibrationTool()
 {
 	m_ExtrinsicMatrix.create(3, 3, CV_64F);
 
 	m_IntrinsicMatrix.create(3, 3, CV_64F);
+
+	if (m_pBlobDetection == nullptr)
+		m_pBlobDetection = new CBlobDetection();
 }
 
 CalibrationTool::CCalibrationTool::~CCalibrationTool()
@@ -19,63 +23,26 @@ CalibrationTool::CCalibrationTool::~CCalibrationTool()
 
 	if (!m_IntrinsicMatrix.empty())
 		m_IntrinsicMatrix.release();
+
+	if (m_pBlobDetection != nullptr) 
+	{
+		delete m_pBlobDetection;
+		m_pBlobDetection = nullptr;
+	}
 }
 
-bool CalibrationTool::CCalibrationTool::Calibration(cv::Mat& Image)
+bool CalibrationTool::CCalibrationTool::Calibration(cv::Mat& Image, std::vector<cv::Point3d> World)
 {
 	Mat PreImage;
-	if (!PreProecssing(Image, PreImage)) return false;
-
-	if (PreImage.empty()) return false;
-
-
-
-	return true;
-}
-
-bool CalibrationTool::CCalibrationTool::Calibration(vector<CalibrationTool::CFov>& Fovs)
-{
-	if (Fovs.empty()) return false;
-
-	Mat Image = MargeFovImage(Fovs);
-
-	if (Image.empty()) return false;
-
-	Calibration(Image);
-
-	return true;
-}
-
-bool CalibrationTool::CCalibrationTool::PreProecssing(Mat& Image, Mat& PreImage)
-{
-	if (Image.empty()) return false;
-
-	Mat Filtered, thresholded;
 	
-	/*cv::bilateralFilter(Image, Filter,)*/
+	vector<CBlobData> Datas;
 
-	double Val = cv::threshold(Filtered, PreImage, 128, 255, THRESH_OTSU);
+	if (!m_pBlobDetection->BlobDetected(Image, Datas)) return false;
+
+	if (Datas.empty()) return false;
+
+	if (Datas.size() != World.size()) return false;
 
 	return true;
 }
 
-cv::Mat CalibrationTool::CCalibrationTool::MargeFovImage(std::vector<CalibrationTool::CFov>& Fovs)
-{
-	int FovCount = Fovs.size();
-	
-	int MargeWidth = FovCount * Fovs.front().GetFovSize().width;
-	int MargeHeight = FovCount * Fovs.front().GetFovSize().height;
-
-	Mat MargeImage;
-
-	MargeImage.create(MargeWidth, MargeHeight, CV_8UC1);
-
-	std::vector<CalibrationTool::CFov>::iterator iter = Fovs.begin();
-
-	for (iter; iter != Fovs.end(); ++iter) 
-	{
-		
-	}
-
-	return cv::Mat();
-}

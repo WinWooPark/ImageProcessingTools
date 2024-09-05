@@ -27,6 +27,18 @@
     <Filter Include="CommonTools\Source">
       <UniqueIdentifier>{c9ee3b2d-f70c-48ac-8c35-d5984a11e3c4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ImageProcessingTool">
+      <UniqueIdentifier>{5787941b-0c96-47c7-8787-212475a026bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ImageProcessingTool\Blob">
+      <UniqueIdentifier>{a03edf01-7aef-4e26-8c92-6ec717e46b2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ImageProcessingTool\Blob\Header">
+      <UniqueIdentifier>{c29e7615-3eb5-4906-92d6-dbeb83423e08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ImageProcessingTool\Blob\Source">
+      <UniqueIdentifier>{72269a84-e903-40a9-97c3-15a06be8b516}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -47,7 +59,16 @@
     <ClInclude Include="CImageConversionTool.h">
       <Filter>CommonTools\Header</Filter>
     </ClInclude>
-    <ClInclude Include="CFov.h">
+    <ClInclude Include="CBlobData.h">
+      <Filter>ImageProcessingTool\Blob\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CBlobDetection.h">
+      <Filter>ImageProcessingTool\Blob\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CommonDefine.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CCalibrationData.h">
       <Filter>CalibrationTool\Header</Filter>
     </ClInclude>
   </ItemGroup>
@@ -64,7 +85,13 @@
     <ClCompile Include="CImageConversionTool.cpp">
       <Filter>CommonTools\Source</Filter>
     </ClCompile>
-    <ClCompile Include="CFov.cpp">
+    <ClCompile Include="CBlobData.cpp">
+      <Filter>ImageProcessingTool\Blob\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CBlobDetection.cpp">
+      <Filter>ImageProcessingTool\Blob\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CCalibrationData.cpp">
       <Filter>CalibrationTool\Source</Filter>
     </ClCompile>
   </ItemGroup>
