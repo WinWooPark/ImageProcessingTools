@@ -6,8 +6,13 @@ namespace CalibrationTool
 	class IMAGE_PROC_TOOLS_API CCalibrationData
 	{
 	private:
-		cv::Point m_ImagePoint;
-		cv::Point3d m_WorldPoint;
+		std::vector<cv::Point> m_ImagePoints;
+		std::vector<cv::Point3d> m_CameraPoints;
+		std::vector<cv::Point3d> m_WorldPoints;
+		
+		cv::Mat m_IntrinsicMatrix;
+		cv::Mat m_ExtrinsicMatrix;
+		cv::Mat m_TransformMatrix;
 
 	public:
 		CCalibrationData();

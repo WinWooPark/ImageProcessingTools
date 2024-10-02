@@ -13,7 +13,7 @@ namespace Blob
 		CBlobDetection();
 		~CBlobDetection();
 
-		bool BlobDetected(cv::Mat& Image, std::vector<CBlobData>& Blobs);
+		bool BlobDetected(cv::Mat& Image, std::vector<Blob::CBlobData>& Blobs);
 
 	private:
 		bool PreProecssing(cv::Mat& Image, cv::Mat& PreImage);

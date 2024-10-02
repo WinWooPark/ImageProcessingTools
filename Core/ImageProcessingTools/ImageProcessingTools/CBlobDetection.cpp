@@ -42,21 +42,24 @@ bool Blob::CBlobDetection::BlobDetected(cv::Mat& Image, std::vector<CBlobData>& 
 			double cx = m.m10 / m.m00; // x 좌표
 			double cy = m.m01 / m.m00; // y 좌표
 
-			CBlobData BlobData(cv::Point2d(cx, cy));
+			//무게중심점
+			cv::Point2d point(cx, cy);
+			
+			//영역 넓이
+			double Area = contourArea(*iter);
+			
+			//외접 사각형
+			cv::Rect boundingBox = cv::boundingRect(*iter);
+
+			CBlobData BlobData(point, boundingBox, Area);
+
+			//컨투어 좌표 복사
+			auto contours = BlobData.GetContours();
+			contours->assign(iter->begin(), iter->end());
+
 			Blobs.push_back(BlobData);
 		}
 	}
-
-	auto SortRule = [&](cv::Point2d Left, cv::Point2d Right)->bool
-		{
-			if (Left.x < Right.x && Left.y < Right.y) 
-				return true;
-
-			else 
-				return false;
-		};
-
-	std::sort(Blobs.begin(), Blobs.end(), SortRule);
 
 	return true;
 }
@@ -66,6 +69,19 @@ bool Blob::CBlobDetection::PreProecssing(cv::Mat& Image, cv::Mat& PreImage)
 	if (Image.empty()) return false;
 
 	Mat Filtered;
+
+	switch (Image.channels())
+	{
+	case 1: //Gray
+		break;
+
+	case 3: //Color
+		cv::cvtColor(Image, Filtered, COLOR_BGR2GRAY);
+		break;
+
+	default:
+		break;
+	}
 
 	/*cv::bilateralFilter(Image, Filter,)*/
 
