@@ -150,6 +150,7 @@
     <ClInclude Include="CBlobDetection.h" />
     <ClInclude Include="CCalibrationData.h" />
     <ClInclude Include="CCalibrationTool.h" />
+    <ClInclude Include="CCommonDefine.h" />
     <ClInclude Include="CImageConversionTool.h" />
     <ClInclude Include="CommonDefine.h" />
     <ClInclude Include="framework.h" />

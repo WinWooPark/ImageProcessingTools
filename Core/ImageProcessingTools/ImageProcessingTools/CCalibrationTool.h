@@ -1,7 +1,6 @@
 #pragma once
 #include "Basic.h"
 
-//Calibration Data;
 #include "CCalibrationData.h"
 
 //Blobs ฐüทร 

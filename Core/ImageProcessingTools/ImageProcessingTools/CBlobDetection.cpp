@@ -5,6 +5,11 @@ using namespace std;
 using namespace cv;
 using namespace Blob;
 
+#ifdef _USE_CONCURRENT_TASK_
+using namespace Concurrency;
+#endif
+
+
 Blob::CBlobDetection::CBlobDetection()
 {
 }
@@ -31,9 +36,15 @@ bool Blob::CBlobDetection::BlobDetected(cv::Mat& Image, std::vector<CBlobData>& 
 
 	if (Contours.empty()) return false;
 
-	vector<vector<cv::Point>>::iterator iter = Contours.begin();
+	auto start = std::chrono::high_resolution_clock::now();
 
+	#ifdef _USE_CONCURRENT_TASK_
+	concurrent_vector<CBlobData> ConcurrentBlobDatas;
+	auto ConcurrentRutine = [&](auto iter)
+#else
+	vector<vector<cv::Point>>::iterator iter = Contours.begin();
 	for (; iter != Contours.end(); ++iter)
+#endif
 	{
 		cv::Moments m = cv::moments(*iter);
 
@@ -44,10 +55,10 @@ bool Blob::CBlobDetection::BlobDetected(cv::Mat& Image, std::vector<CBlobData>& 
 
 			//무게중심점
 			cv::Point2d point(cx, cy);
-			
+
 			//영역 넓이
 			double Area = contourArea(*iter);
-			
+
 			//외접 사각형
 			cv::Rect boundingBox = cv::boundingRect(*iter);
 
@@ -57,10 +68,24 @@ bool Blob::CBlobDetection::BlobDetected(cv::Mat& Image, std::vector<CBlobData>& 
 			auto contours = BlobData.GetContours();
 			contours->assign(iter->begin(), iter->end());
 
+#ifdef _USE_CONCURRENT_TASK_
+			ConcurrentBlobDatas.push_back(BlobData);
+#else
 			Blobs.push_back(BlobData);
+#endif
 		}
-	}
+	};
 
+#ifdef _USE_CONCURRENT_TASK_
+	Concurrency::parallel_for_each(Contours.begin(), Contours.end(), ConcurrentRutine);
+	Blobs.assign(ConcurrentBlobDatas.begin(), ConcurrentBlobDatas.end());
+#endif
+
+	auto end = std::chrono::high_resolution_clock::now();
+	std::chrono::duration<double> elapsed_seconds = end - start;
+	
+	printf("%f ms", elapsed_seconds);
+	
 	return true;
 }
 
